@@ -34,7 +34,7 @@ body {
   background: white;
   padding: 2rem;
   border-radius: 16px;
-  width: 320px;
+  width: min(420px, 92vw);
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 
@@ -60,6 +60,40 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.form-message {
+  width: 100%;
+  max-width: 260px;
+  margin: -0.2rem 0 0.8rem;
+  font-size: 0.9rem;
+}
+
+.form-message.error {
+  color: #dc2626;
+}
+
+.form-message.success {
+  color: #15803d;
+}
+
+.switch-text {
+  margin-top: 0.4rem;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.switch-btn {
+  border: none;
+  background: transparent;
+  color: #ea580c;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.15rem 0.3rem;
+}
+
+.switch-btn:hover {
+  text-decoration: underline;
 }
 /* LOGIN INPUTS */
 .login-box input {

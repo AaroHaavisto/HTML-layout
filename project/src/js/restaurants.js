@@ -7,6 +7,7 @@ import {
   getDailyMenu,
   getWeeklyMenu,
 } from '../api/restaurants.js';
+import {logout, requireAuth} from './auth.js';
 import {filterRestaurants, sortRestaurants} from '../utils/search.js';
 
 let allRestaurants = [];
@@ -125,11 +126,29 @@ const dailyBtn = document.getElementById('dailyBtn');
 const weeklyBtn = document.getElementById('weeklyBtn');
 const restaurantsList = document.getElementById('restaurantsList');
 const menuContent = document.getElementById('menuContent');
+const heroProfileName = document.getElementById('heroProfileName');
+const logoutBtn = document.getElementById('logoutBtn');
 
 /**
  * Initialize the app
  */
 async function init() {
+  const currentUser = requireAuth();
+  if (!currentUser) {
+    return;
+  }
+
+  if (heroProfileName) {
+    heroProfileName.textContent = currentUser.username || 'Opiskelija';
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      logout();
+      window.location.href = 'login.html';
+    });
+  }
+
   try {
     // Load restaurants on startup
     await loadRestaurants();

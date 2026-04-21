@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Opiskelijaravintolat</title>
-    <link rel="stylesheet" href="../../css/main_style.css" />
     <link rel="stylesheet" href="../../css/restaurants_style.css" />
   </head>
   <body>
@@ -13,16 +12,27 @@
         'https://media2.edu.metropolia.fi/restaurant/api/v1';
     </script>
 
-    <header class="header">
-      <div class="header-container">
-        <h1>Opiskelijaravintolat</h1>
-        <nav class="menu-toggle">
-          <button class="menu-btn">☰</button>
-        </nav>
+    <section class="landing-hero">
+      <div class="hero-actions">
+        <a href="profile.html" class="profile-nav" aria-label="Avaa profiili">
+          <img
+            src="../../img/picture8.jpg"
+            alt="Profiili"
+            class="profile-avatar"
+          />
+          <span class="profile-name" id="heroProfileName">Opiskelija</span>
+        </a>
+        <button type="button" class="logout-btn" id="logoutBtn">Logout</button>
       </div>
-    </header>
 
-    <main class="container">
+      <div class="hero-content">
+        <h1>Opiskelijaravintolat</h1>
+        <p>Valitse ravintola ja tarkastele ruokalistaa</p>
+        <a href="#content" class="scroll-btn">↓ Selaa alas ↓</a>
+      </div>
+    </section>
+
+    <main id="content" class="container">
       <!-- Search and Filter Section -->
       <section class="search-section">
         <div class="search-container">

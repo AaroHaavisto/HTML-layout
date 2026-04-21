@@ -8,20 +8,30 @@
   </head>
   <body>
     <section class="hero profile-hero">
-      <a href="main.html" class="back-btn">← Takaisin</a>
+      <a href="restaurants.html" class="back-btn" id="backBtn">← Takaisin</a>
+      <button type="button" class="logout-btn" id="logoutBtn">Logout</button>
 
       <div class="profile-card">
         <img src="../../img/picture8.jpg" alt="Profiili" class="profile-img" />
 
-        <h1>Opiskelija</h1>
+        <h1 id="profileHeroName">Opiskelija</h1>
         <p>Metropolia AMK</p>
         <div class="profile-box">
           <div class="profile-info">
-            <p><strong>Sähköposti:</strong> opiskelija@email.com</p>
-            <p><strong>Suosikki ravintola:</strong> Metropolia Karamalmi</p>
+            <p>
+              <strong>Käyttäjätunnus:</strong>
+              <span id="profileUsername">-</span>
+            </p>
+            <p><strong>Sähköposti:</strong> <span id="profileEmail">-</span></p>
+            <p>
+              <strong>Suosikki ravintola:</strong>
+              <span id="profileFavouriteRestaurant">-</span>
+            </p>
           </div>
         </div>
       </div>
     </section>
+
+    <script type="module" src="../js/profile.js"></script>
   </body>
 </html>

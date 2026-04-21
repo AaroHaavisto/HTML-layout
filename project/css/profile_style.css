@@ -88,3 +88,23 @@ body {
   background: #ffedd5;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
+
+.logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  text-decoration: none;
+  background: #ea580c;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.logout-btn:hover {
+  background: #c2410c;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}

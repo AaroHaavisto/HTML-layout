@@ -12,13 +12,73 @@
         <h1>Kirjaudu sisään</h1>
         <p>Opiskelijaravintolat</p>
 
-        <form class="login-form" action="main.html">
-          <input type="text" placeholder="Käyttäjätunnus" required />
-          <input type="password" placeholder="Salasana" required />
+        <div id="loginPanel">
+          <form class="login-form" id="loginForm">
+            <input
+              type="text"
+              name="username"
+              placeholder="Käyttäjätunnus"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Salasana"
+              required
+            />
+            <p class="form-message error" id="loginError"></p>
+            <button type="submit">Kirjaudu</button>
+          </form>
 
-          <button type="submit">Kirjaudu</button>
-        </form>
+          <p class="switch-text">
+            Ei käyttäjää?
+            <button type="button" class="switch-btn" id="showRegister">
+              Rekisteröidy
+            </button>
+          </p>
+        </div>
+
+        <div id="registerPanel" hidden>
+          <form class="login-form" id="registerForm">
+            <input
+              type="text"
+              name="username"
+              placeholder="Käyttäjätunnus"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Sähköposti"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Salasana"
+              required
+            />
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Vahvista salasana"
+              required
+            />
+            <p class="form-message error" id="registerError"></p>
+            <p class="form-message success" id="registerSuccess"></p>
+            <button type="submit">Rekisteröidy</button>
+          </form>
+
+          <p class="switch-text">
+            Onko jo käyttäjä?
+            <button type="button" class="switch-btn" id="showLogin">
+              Kirjaudu
+            </button>
+          </p>
+        </div>
       </div>
     </section>
+
+    <script type="module" src="../js/login.js"></script>
   </body>
 </html>
