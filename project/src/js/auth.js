@@ -118,6 +118,50 @@ export function updateCurrentUser(nextUser) {
   return normalizedUser;
 }
 
+export function updateUserProfile({username, email, password}) {
+  const currentUser = getCurrentUser();
+  if (!currentUser) {
+    return {ok: false, message: 'Et ole kirjautunut sisään.'};
+  }
+
+  const nextUsername = String(username || '').trim();
+  const nextEmail = String(email || '').trim();
+  const nextPassword = String(password || '');
+
+  if (!nextUsername) {
+    return {ok: false, message: 'Käyttäjätunnus ei voi olla tyhjä.'};
+  }
+
+  if (!nextEmail) {
+    return {ok: false, message: 'Sähköposti ei voi olla tyhjä.'};
+  }
+
+  const users = readUsers();
+  const duplicateUser = users.find(
+    user =>
+      user.id !== currentUser.id &&
+      user.username.toLowerCase() === nextUsername.toLowerCase()
+  );
+
+  if (duplicateUser) {
+    return {ok: false, message: 'Käyttäjätunnus on jo käytössä.'};
+  }
+
+  const updatedUser = {
+    ...currentUser,
+    username: nextUsername,
+    email: nextEmail,
+    password: nextPassword ? nextPassword : currentUser.password,
+  };
+
+  const normalizedUser = updateCurrentUser(updatedUser);
+  if (!normalizedUser) {
+    return {ok: false, message: 'Tietojen päivitys epäonnistui.'};
+  }
+
+  return {ok: true, user: normalizedUser};
+}
+
 export function setUserAvatar(avatarDataUrl) {
   const currentUser = getCurrentUser();
   if (!currentUser) {
