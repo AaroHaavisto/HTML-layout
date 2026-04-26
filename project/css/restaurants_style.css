@@ -231,6 +231,38 @@ body {
   margin-top: 1rem;
 }
 
+.advanced-filters {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #9a3412;
+}
+
+.filter-select {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  background: white;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
 .view-filter-btn {
   border: 1px solid var(--border-color);
   background: #fff7ed;
@@ -436,7 +468,8 @@ body {
 .meal-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 0.75rem;
   padding: 0.75rem 0;
   border-bottom: 1px solid var(--border-color);
 }
@@ -447,19 +480,26 @@ body {
 
 .meal-name {
   flex: 1;
+  min-width: 0;
   color: var(--text-color);
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .meal-price {
+  flex-shrink: 0;
   font-weight: 600;
   color: var(--primary-color);
   margin-left: 1rem;
+  text-align: right;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 /* Weekly Menu */
 .weekly-menu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 
@@ -473,6 +513,19 @@ body {
 .day-menu h4 {
   margin-top: 0;
   color: var(--primary-color);
+}
+
+.day-menu .meal-item {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+}
+
+.day-menu .meal-price {
+  margin-left: 0;
+  text-align: left;
+  font-size: 0.88rem;
+  color: #9a3412;
 }
 
 /* States */

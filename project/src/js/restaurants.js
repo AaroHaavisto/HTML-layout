@@ -20,6 +20,8 @@ let selectedRestaurantId = null;
 let isDaily = true; // true = daily, false = weekly
 let currentSearchTerm = '';
 let showOnlyFavorites = false;
+let selectedCity = 'all';
+let selectedProvider = 'all';
 
 const MOCK_RESTAURANTS = [
   {
@@ -27,18 +29,21 @@ const MOCK_RESTAURANTS = [
     name: 'Metropolia Myyrmäki',
     address: 'Jukka Mallin katu 18',
     city: 'Vantaa',
+    company: 'Sodexo',
   },
   {
     _id: 'mock-2',
     name: 'Metropolia Myllypuro',
     address: 'Myllypurontie 1',
     city: 'Helsinki',
+    company: 'Compass Group',
   },
   {
     _id: 'mock-3',
     name: 'Unicafe Kaivopiha',
     address: 'Yliopistonkatu 3',
     city: 'Helsinki',
+    company: 'Unicafe',
   },
 ];
 
@@ -112,6 +117,83 @@ function getRestaurantName(restaurant) {
   return restaurant.name || 'Nimetön ravintola';
 }
 
+function getRestaurantCity(restaurant) {
+  return (
+    restaurant.city ||
+    restaurant.municipality ||
+    restaurant.location?.city ||
+    ''
+  );
+}
+
+function getRestaurantProvider(restaurant) {
+  return (
+    restaurant.company ||
+    restaurant.provider ||
+    restaurant.organization ||
+    restaurant.type ||
+    ''
+  );
+}
+
+function optionValue(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase();
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function getUniqueSortedValues(restaurants, getter) {
+  return Array.from(
+    new Set(
+      restaurants
+        .map(getter)
+        .map(value => String(value || '').trim())
+        .filter(Boolean)
+    )
+  ).sort((a, b) => a.localeCompare(b, 'fi'));
+}
+
+function fillSelectOptions(selectElement, values, defaultLabel) {
+  if (!selectElement) {
+    return;
+  }
+
+  const previousValue = selectElement.value || 'all';
+  selectElement.innerHTML = `<option value="all">${defaultLabel}</option>${values
+    .map(
+      value =>
+        `<option value="${escapeHtml(optionValue(value))}">${escapeHtml(value)}</option>`
+    )
+    .join('')}`;
+
+  const hasPreviousValue = Array.from(selectElement.options).some(
+    option => option.value === previousValue
+  );
+  selectElement.value = hasPreviousValue ? previousValue : 'all';
+}
+
+function initializeFilterOptions(restaurants) {
+  fillSelectOptions(
+    cityFilter,
+    getUniqueSortedValues(restaurants, getRestaurantCity),
+    'Kaikki kaupungit'
+  );
+  fillSelectOptions(
+    providerFilter,
+    getUniqueSortedValues(restaurants, getRestaurantProvider),
+    'Kaikki palveluntarjoajat'
+  );
+}
+
 function formatCourse(course) {
   const parts = [course?.name].filter(Boolean);
 
@@ -137,6 +219,8 @@ const heroProfileName = document.getElementById('heroProfileName');
 const heroAvatar = document.getElementById('heroAvatar');
 const logoutBtn = document.getElementById('logoutBtn');
 const viewFilterButtons = document.querySelectorAll('.view-filter-btn');
+const cityFilter = document.getElementById('cityFilter');
+const providerFilter = document.getElementById('providerFilter');
 const RESTAURANTS_CACHE_KEY = 'or_restaurants_cache';
 
 function saveRestaurantCache(restaurants) {
@@ -166,14 +250,27 @@ function isFavouriteRestaurant(restaurantId) {
 }
 
 function getVisibleRestaurants() {
-  const searchFiltered = filterRestaurants(allRestaurants, currentSearchTerm);
+  let visibleRestaurants = filterRestaurants(allRestaurants, currentSearchTerm);
+
+  if (selectedCity !== 'all') {
+    visibleRestaurants = visibleRestaurants.filter(
+      restaurant => optionValue(getRestaurantCity(restaurant)) === selectedCity
+    );
+  }
+
+  if (selectedProvider !== 'all') {
+    visibleRestaurants = visibleRestaurants.filter(
+      restaurant =>
+        optionValue(getRestaurantProvider(restaurant)) === selectedProvider
+    );
+  }
 
   if (!showOnlyFavorites) {
-    return searchFiltered;
+    return visibleRestaurants;
   }
 
   const favouriteIds = new Set(getFavouriteRestaurantIds());
-  return searchFiltered.filter(restaurant =>
+  return visibleRestaurants.filter(restaurant =>
     favouriteIds.has(getRestaurantId(restaurant))
   );
 }
@@ -243,6 +340,16 @@ async function init() {
       if (e.key === 'Enter') handleSearch();
     });
 
+    cityFilter?.addEventListener('change', () => {
+      selectedCity = cityFilter.value;
+      refreshRestaurantList();
+    });
+
+    providerFilter?.addEventListener('change', () => {
+      selectedProvider = providerFilter.value;
+      refreshRestaurantList();
+    });
+
     viewFilterButtons.forEach(button => {
       button.addEventListener('click', () => {
         showOnlyFavorites = button.dataset.filter === 'favorites';
@@ -287,11 +394,13 @@ async function loadRestaurants() {
     allRestaurants = normalizeRestaurants(await getRestaurants());
     allRestaurants = sortRestaurants(allRestaurants);
     saveRestaurantCache(allRestaurants);
+    initializeFilterOptions(allRestaurants);
     displayRestaurants(getVisibleRestaurants());
   } catch (error) {
     console.error('Error loading restaurants:', error);
     allRestaurants = MOCK_RESTAURANTS;
     saveRestaurantCache(allRestaurants);
+    initializeFilterOptions(allRestaurants);
     displayRestaurants(getVisibleRestaurants());
     restaurantsList.insertAdjacentHTML(
       'beforebegin',
@@ -305,8 +414,26 @@ async function loadRestaurants() {
  */
 function displayRestaurants(restaurants) {
   if (restaurants.length === 0) {
-    restaurantsList.innerHTML =
-      '<div class="empty">Ei ravintoloita löytynyt</div>';
+    const hasSearch = currentSearchTerm.trim().length > 0;
+    const hasAdvancedFilters =
+      selectedCity !== 'all' || selectedProvider !== 'all';
+    let emptyMessage = 'Ravintolalista on tyhjä';
+
+    if (showOnlyFavorites && hasSearch) {
+      emptyMessage = 'Ei suosikkiravintoloita tällä haulla';
+    } else if (showOnlyFavorites && hasAdvancedFilters) {
+      emptyMessage = 'Ei suosikkeja valituilla filttereillä';
+    } else if (showOnlyFavorites) {
+      emptyMessage = 'Sinulla ei ole vielä suosikkiravintoloita';
+    } else if (hasSearch && hasAdvancedFilters) {
+      emptyMessage = 'Ei ravintoloita tällä haulla ja valituilla filttereillä';
+    } else if (hasAdvancedFilters) {
+      emptyMessage = 'Ei ravintoloita valituilla filttereillä';
+    } else if (hasSearch) {
+      emptyMessage = 'Ei ravintoloita tällä haulla';
+    }
+
+    restaurantsList.innerHTML = `<div class="empty">${emptyMessage}</div>`;
     return;
   }
 

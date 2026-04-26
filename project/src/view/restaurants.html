@@ -29,7 +29,6 @@
       <div class="hero-content">
         <h1>Opiskelijaravintolat</h1>
         <p>Valitse ravintola ja tarkastele ruokalistaa</p>
-        <a href="#content" class="scroll-btn">↓ Selaa alas ↓</a>
       </div>
     </section>
 
@@ -71,6 +70,22 @@
           <button type="button" class="view-filter-btn" data-filter="favorites">
             Tykätyt ravintolat
           </button>
+        </div>
+
+        <div class="advanced-filters" aria-label="Lisäsuodattimet">
+          <label class="filter-group" for="cityFilter">
+            <span>Kaupunki</span>
+            <select id="cityFilter" class="filter-select">
+              <option value="all">Kaikki kaupungit</option>
+            </select>
+          </label>
+
+          <label class="filter-group" for="providerFilter">
+            <span>Palveluntarjoaja</span>
+            <select id="providerFilter" class="filter-select">
+              <option value="all">Kaikki palveluntarjoajat</option>
+            </select>
+          </label>
         </div>
       </section>
 
