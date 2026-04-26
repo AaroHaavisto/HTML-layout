@@ -1,16 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fi">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opiskelijaravintolat</title>
-    <link rel="stylesheet" href="../../css/restaurants_style.css" />
+    <link rel="stylesheet" href="../../css/restaurants_style.css">
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
-    />
+      crossorigin
+    >
   </head>
   <body>
     <script>
@@ -26,10 +26,10 @@
             alt="Profiili"
             class="profile-avatar"
             id="heroAvatar"
-          />
+          >
           <span class="profile-name" id="heroProfileName">Opiskelija</span>
         </a>
-        <button type="button" class="logout-btn" id="logoutBtn">Logout</button>
+        <button type="button" class="logout-btn" id="logoutBtn">Kirjaudu ulos</button>
       </div>
 
       <div class="hero-content">
@@ -39,7 +39,6 @@
     </section>
 
     <main id="content" class="container">
-      <!-- Search and Filter Section -->
       <section class="search-section">
         <div class="search-container">
           <input
@@ -47,20 +46,26 @@
             id="searchInput"
             class="search-input"
             placeholder="Hae ravintoloita..."
-            aria-label="Hae ravintoloita nimellä tai osoitteella"
-          />
-          <button class="search-btn" id="searchBtn">Hae</button>
+            aria-label="Hae ravintoloita nimell&auml; tai osoitteella"
+          >
+          <button class="search-btn" id="searchBtn" type="button">Hae</button>
         </div>
 
         <div class="menu-type-buttons">
           <button
             class="menu-btn-daily active"
             id="dailyBtn"
+            type="button"
             aria-pressed="true"
           >
-            Päivän ruokalista
+            P&auml;iv&auml;n ruokalista
           </button>
-          <button class="menu-btn-weekly" id="weeklyBtn" aria-pressed="false">
+          <button
+            class="menu-btn-weekly"
+            id="weeklyBtn"
+            type="button"
+            aria-pressed="false"
+          >
             Viikon ruokalista
           </button>
         </div>
@@ -74,19 +79,19 @@
             Kaikki ravintolat
           </button>
           <button type="button" class="view-filter-btn" data-filter="favorites">
-            Tykätyt ravintolat
+            Tyk&auml;tyt ravintolat
           </button>
         </div>
 
-        <div class="advanced-filters" aria-label="Lisäsuodattimet">
-          <label class="filter-group" for="cityFilter">
+        <div class="advanced-filters">
+          <label class="filter-group">
             <span>Kaupunki</span>
             <select id="cityFilter" class="filter-select">
               <option value="all">Kaikki kaupungit</option>
             </select>
           </label>
 
-          <label class="filter-group" for="providerFilter">
+          <label class="filter-group">
             <span>Palveluntarjoaja</span>
             <select id="providerFilter" class="filter-select">
               <option value="all">Kaikki palveluntarjoajat</option>
@@ -104,7 +109,6 @@
       </section>
 
       <div class="content-wrapper">
-        <!-- Restaurants List -->
         <aside class="restaurants-sidebar">
           <h2>Ravintolat</h2>
           <div id="restaurantsList" class="restaurants-list">
@@ -112,11 +116,10 @@
           </div>
         </aside>
 
-        <!-- Menu Display -->
         <section class="menu-section">
           <div id="menuContent" class="menu-content">
             <div class="empty-state">
-              <p>Valitse ravintola nähdäksesi ruokalistan</p>
+              <p>Valitse ravintola n&auml;hd&auml;ksesi ruokalistan</p>
             </div>
           </div>
         </section>
@@ -124,7 +127,7 @@
     </main>
 
     <footer class="footer">
-      <p>&copy; 2026 Opiskelijaravintolat. Kaikki oikeudet pidätetään.</p>
+      <p>&copy; 2026 Opiskelijaravintolat. Kaikki oikeudet pid&auml;tet&auml;&auml;n.</p>
     </footer>
 
     <script type="module" src="../js/restaurants.js"></script>

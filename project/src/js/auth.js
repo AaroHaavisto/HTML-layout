@@ -62,7 +62,7 @@ export function redirectIfAuthenticated() {
   }
 }
 
-export function registerUser({username, email, password, favouriteRestaurant}) {
+export function registerUser({username, email, password}) {
   const users = readUsers();
   const normalizedUsername = username.trim().toLowerCase();
 

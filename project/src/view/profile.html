@@ -1,15 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fi">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profiili</title>
-    <link rel="stylesheet" href="../../css/profile_style.css" />
+    <link rel="stylesheet" href="../../css/profile_style.css">
   </head>
   <body>
     <section class="hero profile-hero">
-      <a href="restaurants.html" class="back-btn" id="backBtn">← Takaisin</a>
-      <button type="button" class="logout-btn" id="logoutBtn">Logout</button>
+      <a href="restaurants.html" class="back-btn" id="backBtn">&larr; Takaisin</a>
+      <button type="button" class="logout-btn" id="logoutBtn">Kirjaudu ulos</button>
 
       <div class="profile-card">
         <label class="profile-image-wrap" for="avatarInput">
@@ -18,7 +18,7 @@
             alt="Profiili"
             class="profile-img"
             id="profileAvatar"
-          />
+          >
           <span class="avatar-overlay">Vaihda kuva</span>
         </label>
         <input
@@ -26,16 +26,16 @@
           id="avatarInput"
           accept="image/*"
           class="avatar-input"
-        />
+        >
         <h1 id="profileHeroName">Opiskelija</h1>
         <p>Metropolia AMK</p>
         <div class="profile-box">
           <div class="profile-info">
             <p>
-              <strong>Käyttäjätunnus:</strong>
+              <strong>K&auml;ytt&auml;j&auml;tunnus:</strong>
               <span id="profileUsername">-</span>
             </p>
-            <p><strong>Sähköposti:</strong> <span id="profileEmail">-</span></p>
+            <p><strong>S&auml;hk&ouml;posti:</strong> <span id="profileEmail">-</span></p>
           </div>
 
           <button type="button" id="showEditBtn" class="edit-toggle-btn">
@@ -45,42 +45,36 @@
           <form id="profileForm" class="profile-form is-hidden">
             <h2>Muokkaa tietoja</h2>
 
-            <label class="profile-label" for="editUsername"
-              >Käyttäjätunnus</label
-            >
+            <label class="profile-label" for="editUsername">K&auml;ytt&auml;j&auml;tunnus</label>
             <input
               type="text"
               id="editUsername"
               class="profile-input"
               autocomplete="username"
               required
-            />
+            >
 
-            <label class="profile-label" for="editEmail">Sähköposti</label>
+            <label class="profile-label" for="editEmail">S&auml;hk&ouml;posti</label>
             <input
               type="email"
               id="editEmail"
               class="profile-input"
               autocomplete="email"
               required
-            />
-
-            <label class="profile-label" for="editPassword"
-              >Uusi salasana (valinnainen)</label
             >
+
+            <label class="profile-label" for="editPassword">Uusi salasana (valinnainen)</label>
             <input
               type="password"
               id="editPassword"
               class="profile-input"
               autocomplete="new-password"
               minlength="4"
-            />
+            >
 
             <div class="profile-form-actions">
               <button type="submit" class="save-btn">Tallenna muutokset</button>
-              <button type="button" id="cancelEditBtn" class="cancel-btn">
-                Peruuta
-              </button>
+              <button type="button" id="cancelEditBtn" class="cancel-btn">Peruuta</button>
             </div>
             <p id="profileMessage" class="profile-message"></p>
           </form>

@@ -1,15 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fi">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kirjaudu sisään</title>
-    <link rel="stylesheet" href="../../css/login_style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirjaudu sis&auml;&auml;n</title>
+    <link rel="stylesheet" href="../../css/login_style.css">
   </head>
   <body>
     <section class="hero login-hero">
       <div class="login-box">
-        <h1>Kirjaudu sisään</h1>
+        <h1>Kirjaudu sis&auml;&auml;n</h1>
         <p>Opiskelijaravintolat</p>
 
         <div id="loginPanel">
@@ -17,23 +17,24 @@
             <input
               type="text"
               name="username"
-              placeholder="Käyttäjätunnus"
+              placeholder="K&auml;ytt&auml;j&auml;tunnus"
               required
-            />
+            >
             <input
               type="password"
               name="password"
               placeholder="Salasana"
+              autocomplete="current-password"
               required
-            />
+            >
             <p class="form-message error" id="loginError"></p>
             <button type="submit">Kirjaudu</button>
           </form>
 
           <p class="switch-text">
-            Ei käyttäjää?
+            Ei k&auml;ytt&auml;j&auml;&auml;?
             <button type="button" class="switch-btn" id="showRegister">
-              Rekisteröidy
+              Rekister&ouml;idy
             </button>
           </p>
         </div>
@@ -43,34 +44,36 @@
             <input
               type="text"
               name="username"
-              placeholder="Käyttäjätunnus"
+              placeholder="K&auml;ytt&auml;j&auml;tunnus"
               required
-            />
+            >
             <input
               type="email"
               name="email"
-              placeholder="Sähköposti"
+              placeholder="S&auml;hk&ouml;posti"
               required
-            />
+            >
             <input
               type="password"
               name="password"
               placeholder="Salasana"
+              autocomplete="new-password"
               required
-            />
+            >
             <input
               type="password"
               name="confirmPassword"
               placeholder="Vahvista salasana"
+              autocomplete="new-password"
               required
-            />
+            >
             <p class="form-message error" id="registerError"></p>
             <p class="form-message success" id="registerSuccess"></p>
-            <button type="submit">Rekisteröidy</button>
+            <button type="submit">Rekister&ouml;idy</button>
           </form>
 
           <p class="switch-text">
-            Onko jo käyttäjä?
+            Onko jo k&auml;ytt&auml;j&auml;?
             <button type="button" class="switch-btn" id="showLogin">
               Kirjaudu
             </button>

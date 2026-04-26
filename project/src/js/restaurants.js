@@ -351,20 +351,6 @@ function initializeFilterOptions(restaurants) {
   );
 }
 
-function formatCourse(course) {
-  const parts = [course?.name].filter(Boolean);
-
-  if (course?.price) {
-    parts.push(course.price);
-  }
-
-  if (course?.diets) {
-    parts.push(course.diets);
-  }
-
-  return parts.join(' · ');
-}
-
 // DOM Elements
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
@@ -387,17 +373,6 @@ if (restaurantsMapRoot) {
 
 function saveRestaurantCache(restaurants) {
   localStorage.setItem(RESTAURANTS_CACHE_KEY, JSON.stringify(restaurants));
-}
-
-function readRestaurantCache() {
-  try {
-    const restaurants = JSON.parse(
-      localStorage.getItem(RESTAURANTS_CACHE_KEY) || '[]'
-    );
-    return Array.isArray(restaurants) ? restaurants : [];
-  } catch {
-    return [];
-  }
 }
 
 function getFavouriteRestaurantIds() {
