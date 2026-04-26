@@ -314,6 +314,78 @@ body {
   color: white;
 }
 
+.map-section {
+  margin-bottom: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.map-section-header {
+  margin-bottom: 0.75rem;
+}
+
+.map-section-header h2 {
+  margin: 0;
+  color: var(--dark-color);
+  font-size: 1.25rem;
+}
+
+.map-section-header p {
+  margin: 0.4rem 0 0;
+  color: #6b7280;
+}
+
+.restaurants-map-root {
+  width: 100%;
+  height: 320px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.restaurants-map-root .leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+.map-pin {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: #ea580c;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.map-pin.is-nearest {
+  background: #059669;
+  box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.22);
+}
+
+.map-pin.is-selected {
+  background: #b91c1c;
+  transform: scale(1.15);
+}
+
+.map-pin.is-nearest.is-selected {
+  background: #b91c1c;
+  box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.2);
+}
+
+.map-empty-state {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
+  font-weight: 600;
+  text-align: center;
+  padding: 1rem;
+}
+
 /* Content Wrapper */
 .content-wrapper {
   display: grid;
@@ -379,6 +451,28 @@ body {
 .restaurant-item.is-favourite {
   border-color: #fb923c;
   box-shadow: 0 0 0 1px rgba(251, 146, 60, 0.2);
+}
+
+.restaurant-item.is-nearest {
+  border-color: #059669;
+  box-shadow: 0 0 0 1px rgba(5, 150, 105, 0.22);
+}
+
+.nearest-badge {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: #d1fae5;
+  color: #065f46;
+  font-size: 0.72rem;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.restaurant-item.active .nearest-badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 .restaurant-main {
@@ -665,6 +759,10 @@ body {
   .container {
     min-height: calc(100vh - 100px);
     padding: 1rem;
+  }
+
+  .restaurants-map-root {
+    height: 260px;
   }
 }
 

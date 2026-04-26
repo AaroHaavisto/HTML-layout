@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Opiskelijaravintolat</title>
     <link rel="stylesheet" href="../../css/restaurants_style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
   </head>
   <body>
     <script>
@@ -87,6 +93,14 @@
             </select>
           </label>
         </div>
+      </section>
+
+      <section class="map-section" aria-label="Ravintolat kartalla">
+        <div class="map-section-header">
+          <h2>Ravintolat kartalla</h2>
+          <p>Valitse ravintola listasta tai markerista kartalla</p>
+        </div>
+        <div id="restaurantsMapRoot" class="restaurants-map-root"></div>
       </section>
 
       <div class="content-wrapper">
